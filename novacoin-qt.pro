@@ -117,13 +117,16 @@ contains(USE_LEVELDB, -) {
     PRE_TARGETDEPS += $$PWD/src/leveldb/libleveldb.a
     QMAKE_EXTRA_TARGETS += genleveldb
     # Gross ugly hack that depends on qmake internals, unfortunately there is no other way to do it.
-    QMAKE_CLEAN += $$PWD/src/leveldb/libleveldb.a; cd $$PWD/src/leveldb ; $(MAKE) clean
+    QMAKE_CLEAN += $$PWD/src/leveldb/libleveldb.a; 
+    cd $$PWD/src/leveldb ; 
+    $(MAKE) clean
 }
 
 # regenerate src/build.h
 !windows|contains(USE_BUILD_INFO, 1) {
     genbuild.depends = FORCE
-    genbuild.commands = cd $$PWD; /bin/sh share/genbuild.sh $$OUT_PWD/build/build.h
+    genbuild.commands = cd $$PWD; 
+    /bin/sh share/genbuild.sh $$OUT_PWD/build/build.h
     genbuild.target = $$OUT_PWD/build/build.h
     PRE_TARGETDEPS += $$OUT_PWD/build/build.h
     QMAKE_EXTRA_TARGETS += genbuild
